@@ -2,108 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Official Transcript - Fathi Abdikarin Ali</title>
     <style>
-        body { font-family: 'Times New Roman', serif; line-height: 1.5; padding: 20px; background: #f4f4f4; color: #1a1a1a; }
-        .transcript-container { max-width: 850px; margin: auto; background: white; padding: 50px; border: 1px solid #ddd; box-shadow: 0 0 15px rgba(0,0,0,0.1); position: relative; }
+        body { font-family: 'Times New Roman', serif; padding: 20px; background: #f4f4f4; }
+        .container { max-width: 850px; margin: auto; background: white; padding: 40px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         
-        /* Header Section */
-        .header { text-align: center; border-bottom: 3px solid #0056b3; padding-bottom: 15px; margin-bottom: 25px; }
-        .logo-img { width: 120px; height: auto; margin-bottom: 10px; }
-        .header h1 { margin: 5px 0; color: #0056b3; font-size: 26px; text-transform: uppercase; }
-        .header h2 { margin: 5px 0; font-size: 18px; color: #333; }
+        /* Logada oo la dhexaynayo */
+        .logo-container { text-align: center; margin-bottom: 20px; }
+        .logo-img { width: 150px; height: auto; }
         
-        /* Student Info Table */
-        .student-info { width: 100%; margin-bottom: 25px; font-size: 15px; border: none; }
-        .student-info td { border: none; padding: 4px 0; }
-        
-        /* Academic Table */
+        .header { text-align: center; border-bottom: 2px solid #0056b3; padding-bottom: 10px; margin-bottom: 20px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th { background: #0056b3; color: white; padding: 10px; border: 1px solid #0056b3; font-size: 14px; text-transform: uppercase; }
-        td { border: 1px solid #ccc; padding: 10px; font-size: 13px; vertical-align: top; }
-        .year-title { background: #f8f9fa; font-weight: bold; color: #0056b3; }
-
-        /* Descriptions & Summary */
-        .section-title { background: #e9ecef; padding: 8px; font-weight: bold; margin-top: 25px; border-left: 5px solid #0056b3; }
-        .summary-box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-        .summary-item { background: #f1f8ff; padding: 10px; border-radius: 5px; border: 1px solid #d1e9ff; }
-
-        /* Buttons */
-        .btn-box { text-align: center; margin-top: 30px; }
-        .btn { padding: 12px 25px; cursor: pointer; border: none; border-radius: 5px; color: white; font-weight: bold; margin: 5px; transition: 0.3s; }
-        .btn-pdf { background: #0056b3; }
-        .btn-voice { background: #28a745; }
-        .btn:hover { opacity: 0.8; }
-
-        @media print { .btn-box { display: none; } body { background: white; padding: 0; } .transcript-container { border: none; box-shadow: none; width: 100%; } }
+        th { background: #0056b3; color: white; padding: 8px; border: 1px solid #ddd; font-size: 13px; }
+        td { border: 1px solid #ddd; padding: 8px; font-size: 12px; }
+        .btn-box { text-align: center; margin-top: 20px; }
+        button { padding: 12px 25px; cursor: pointer; border: none; border-radius: 5px; color: white; font-weight: bold; margin: 5px; }
+        @media print { .btn-box { display: none; } }
     </style>
 </head>
 <body>
 
-<div class="transcript-container" id="content">
+<div class="container" id="content">
+    <div class="logo-container">
+        <img src="https://i.ibb.co/k2D5r3Y/Screenshot-20260308-214508-WPS-Office.jpg" alt="SOS College Logo" class="logo-img">
+    </div>
+
     <div class="header">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR07p_P67M9Q0L2L47nL8M9u-6pL777S-01Pw&s" alt="SOS College Logo" class="logo-img">
-        <h1>SOS College of Health Sciences University</h1>
-        <h2>FACULTY OF NURSING</h2>
-        <p>OFFICIAL ACADEMIC SYLLABUS & TRANSCRIPT</p>
+        <h1>SOS College of Health Sciences</h1>
+        <p><b>Student:</b> Fathi Abdikarin Ali | <b>ID:</b> 650 | <b>Degree:</b> BSCN</p>
     </div>
 
-    <table class="student-info">
-        <tr><td><b>Student Name:</b> Fathi Abdikarin Ali</td><td><b>Student ID:</b> 650</td></tr>
-        <tr><td><b>Degree:</b> Bachelor of Science in Nursing (BSCN)</td><td><b>Language:</b> English</td></tr>
-    </table>
-
+    <h3>ACADEMIC SYLLABUS</h3>
     <table>
-        <tr><th>Year / Semester</th><th>Course Modules</th><th>Code</th><th>Credits</th></tr>
-        <tr class="year-title"><td colspan="4">YEAR 1 (S1 & S2)</td></tr>
-        <tr><td>Semester 1</td><td>Anatomy I, Physiology I, Psychology, Fundamentals I, Biochemistry I, Sociology, Pathology, Microbiology I, Somali Studies</td><td>BSCN 1101-09</td><td>49.5</td></tr>
-        <tr><td>Semester 2</td><td>Nutrition, Critical Thinking, English I, Arabic, Anatomy II, Physiology II, Fundamentals II, Micro II, Biochemistry II</td><td>BSCN 1201-09</td><td>49.5</td></tr>
-        
-        <tr class="year-title"><td colspan="4">YEAR 2 (S1 & S2)</td></tr>
-        <tr><td>Semester 1</td><td>Clinical Chemistry, Health Assessment, Pharmacology I, Parasitology, Hematology, Computer Skills, English II, Obstetric I</td><td>BSCN 2101-08</td><td>40.5</td></tr>
-        <tr><td>Semester 2</td><td>Med-Surg I, II, III, Islamic Studies, Obstetric II, III, Pediatric Nursing I, II</td><td>BSCN 2201-08</td><td>54.0</td></tr>
-
-        <tr class="year-title"><td colspan="4">YEAR 3 (S1 & S2)</td></tr>
-        <tr><td>Semester 1</td><td>Pharmacology II, Gynecology, Community Health I, Psychiatric I, ENT, Ophthalmic, Communicable Diseases, Dental Care</td><td>BSCN 3101-08</td><td>45.0</td></tr>
-        <tr><td>Semester 2</td><td>Epidemiology, Community Health II, Biostatistics, Immunology, Physiotherapy, Env Health, Psychiatric II, Comm Health III</td><td>BSCN 3201-08</td><td>40.5</td></tr>
-
-        <tr class="year-title"><td colspan="4">YEAR 4 (S1 & S2)</td></tr>
-        <tr><td>Semester 1</td><td>Leadership & Management, Research Methodology, Oncology & Palliative, Gender & Health, Geriatric, Theatre, Critical Care</td><td>BSCN 4101-07</td><td>45.0</td></tr>
-        <tr><td>Semester 2</td><td>Trauma & Emergency, Forensic Nursing, Curriculum & Instruction, Edu Psychology, Reproductive Health, Family Planning, Research Project</td><td>BSCN 4201-07</td><td>41.0</td></tr>
+        <tr><th>Year/Sem</th><th>Subject Title</th><th>Code</th><th>Credits</th></tr>
+        <tr><td>Y1-S1</td><td>Human Anatomy I, Physio I, Psych, Fund. Nursing I, Biochem I, Soc, Path, Micro I, Somali Studies</td><td>BSCN 1101-09</td><td>49.5</td></tr>
+        <tr><td>Y1-S2</td><td>Nutrition, Critical Thinking, Eng I, Arabic, Anatomy II, Physio II, Fund. Nursing II, Micro II, Biochem II</td><td>BSCN 1201-09</td><td>49.5</td></tr>
+        <tr><td>Y2-S1</td><td>Clinical Chem, Health Assess, Pharm I, Parasitology, Hematology, Computer Skills, English II, Midwifery I</td><td>BSCN 2101-08</td><td>40.5</td></tr>
+        <tr><td>Y2-S2</td><td>Med-Surg I, II, III, Islamic Studies, Midwifery II, III, Pediatric I, II</td><td>BSCN 2201-08</td><td>54.0</td></tr>
+        <tr><td>Y3-S1</td><td>Pharm II, Gynecology, Community Health I, Psych Nursing I, ENT, Ophthalmic, Communicable Dis, Dental</td><td>BSCN 3101-08</td><td>45.0</td></tr>
+        <tr><td>Y3-S2</td><td>Epidemiology, Community Health II, Biostat, Immunology, Physiotherapy, Env Health, Psych II, Comm. III</td><td>BSCN 3201-08</td><td>40.5</td></tr>
+        <tr><td>Y4-S1</td><td>Leadership, Research Methods, Oncology, Gender & Health, Geriatric, Theatre, Critical Care & Nephrology</td><td>BSCN 4101-07</td><td>45.0</td></tr>
+        <tr><td>Y4-S2</td><td>Trauma and Emergency, Forensic, Curriculum, Edu Psych, Reproductive Health, Family Planning, Research Proj</td><td>BSCN 4201-07</td><td>41.0</td></tr>
     </table>
 
-    <div class="section-title">GRADUATION & CLINICAL SUMMARY</div>
-    <div class="summary-box">
-        <div class="summary-item"><b>Cumulative GPA:</b> B+</div>
-        <div class="summary-item"><b>Practical GPA:</b> 3.89</div>
-        <div class="summary-item"><b>Total Credits:</b> 345</div>
-        <div class="summary-item"><b>Clinical Hours:</b> 150 Hours</div>
-    </div>
-
-    <div class="section-title">COURSE DESCRIPTIONS HIGHLIGHTS</div>
-    <p style="font-size: 13px; color: #555;">
-        <b>Foundation Sciences:</b> Focus on Human Anatomy, Physiology, and Biochemistry (S1-S2). <br>
-        <b>Clinical Specialties:</b> Advanced training in Obstetric, Midwifery, Med-Surg, and Pediatric Nursing. <br>
-        <b>Advanced Care:</b> Intensive focus on Critical Care, Nephrology, Trauma, and Emergency management.
-    </p>
+    <h3>SUMMARY</h3>
+    <p>Cumulative GPA: <b>B+</b> | Practical GPA: <b>3.89</b> | Total Credits: <b>345</b></p>
 
     <div class="btn-box">
-        <button class="btn btn-pdf" onclick="window.print()">U BADAL PDF (DOWNLOAD)</button>
-        <button class="btn btn-voice" onclick="speakTranscript()">DHAGEYSO CODKA</button>
+        <button onclick="window.print()" style="background:#0056b3;">DAABAC PDF</button>
+        <button onclick="readText()" style="background:#28a745;">DHAGEYSO CODKA</button>
     </div>
 </div>
 
 <script>
-    function speakTranscript() {
-        window.speechSynthesis.cancel();
+    function readText() {
         const text = document.getElementById('content').innerText;
         const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'en-US';
-        msg.rate = 0.9;
         window.speechSynthesis.speak(msg);
     }
 </script>
-
 </body>
 </html>
