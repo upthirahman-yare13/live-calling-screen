@@ -1,65 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="so">
 <head>
     <meta charset="UTF-8">
-    <title>Official Transcript - Fathi Abdikarin Ali</title>
+    <title>CareQueue | TV Display</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
-        body { font-family: 'Times New Roman', serif; padding: 20px; background: #f4f4f4; }
-        .container { max-width: 850px; margin: auto; background: white; padding: 40px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        
-        /* Logada oo la dhexaynayo */
-        .logo-container { text-align: center; margin-bottom: 20px; }
-        .logo-img { width: 150px; height: auto; }
-        
-        .header { text-align: center; border-bottom: 2px solid #0056b3; padding-bottom: 10px; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th { background: #0056b3; color: white; padding: 8px; border: 1px solid #ddd; font-size: 13px; }
-        td { border: 1px solid #ddd; padding: 8px; font-size: 12px; }
-        .btn-box { text-align: center; margin-top: 20px; }
-        button { padding: 12px 25px; cursor: pointer; border: none; border-radius: 5px; color: white; font-weight: bold; margin: 5px; }
-        @media print { .btn-box { display: none; } }
+        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .tv-card { text-align: center; width: 90%; border: 10px solid #2563eb; padding: 50px; border-radius: 40px; box-shadow: 0 0 50px rgba(37, 99, 235, 0.3); }
+        .num { font-size: 250px; color: #fbbf24; font-weight: 900; margin: 0; line-height: 1; }
+        .name { font-size: 80px; margin: 20px 0; text-transform: capitalize; }
+        .room { background: #2563eb; padding: 20px 80px; border-radius: 100px; font-size: 60px; font-weight: bold; display: inline-block; }
     </style>
 </head>
 <body>
-
-<div class="container" id="content">
-    <div class="logo-container">
-        <img src="https://i.ibb.co/k2D5r3Y/Screenshot-20260308-214508-WPS-Office.jpg" alt="SOS College Logo" class="logo-img">
+    <div class="tv-card">
+        <div style="font-size: 40px; color: #94a3b8; letter-spacing: 5px;">BUKAANKA HADDA</div>
+        <div class="num" id="dNum">---</div>
+        <div class="name" id="dName">Sugitaanka...</div>
+        <div class="room">QOLKA: <span id="dRoom">0</span></div>
     </div>
 
-    <div class="header">
-        <h1>SOS College of Health Sciences</h1>
-        <p><b>Student:</b> Fathi Abdikarin Ali | <b>ID:</b> 650 | <b>Degree:</b> BSCN</p>
-    </div>
+    <script>
+        // HALKAN GELI CONFIG-GAAGA FIREBASE EE GAARKA AH
+        const firebaseConfig = { databaseURL: "https://carequeue-manager-default-rtdb.firebaseio.com/" };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
-    <h3>ACADEMIC SYLLABUS</h3>
-    <table>
-        <tr><th>Year/Sem</th><th>Subject Title</th><th>Code</th><th>Credits</th></tr>
-        <tr><td>Y1-S1</td><td>Human Anatomy I, Physio I, Psych, Fund. Nursing I, Biochem I, Soc, Path, Micro I, Somali Studies</td><td>BSCN 1101-09</td><td>49.5</td></tr>
-        <tr><td>Y1-S2</td><td>Nutrition, Critical Thinking, Eng I, Arabic, Anatomy II, Physio II, Fund. Nursing II, Micro II, Biochem II</td><td>BSCN 1201-09</td><td>49.5</td></tr>
-        <tr><td>Y2-S1</td><td>Clinical Chem, Health Assess, Pharm I, Parasitology, Hematology, Computer Skills, English II, Midwifery I</td><td>BSCN 2101-08</td><td>40.5</td></tr>
-        <tr><td>Y2-S2</td><td>Med-Surg I, II, III, Islamic Studies, Midwifery II, III, Pediatric I, II</td><td>BSCN 2201-08</td><td>54.0</td></tr>
-        <tr><td>Y3-S1</td><td>Pharm II, Gynecology, Community Health I, Psych Nursing I, ENT, Ophthalmic, Communicable Dis, Dental</td><td>BSCN 3101-08</td><td>45.0</td></tr>
-        <tr><td>Y3-S2</td><td>Epidemiology, Community Health II, Biostat, Immunology, Physiotherapy, Env Health, Psych II, Comm. III</td><td>BSCN 3201-08</td><td>40.5</td></tr>
-        <tr><td>Y4-S1</td><td>Leadership, Research Methods, Oncology, Gender & Health, Geriatric, Theatre, Critical Care & Nephrology</td><td>BSCN 4101-07</td><td>45.0</td></tr>
-        <tr><td>Y4-S2</td><td>Trauma and Emergency, Forensic, Curriculum, Edu Psych, Reproductive Health, Family Planning, Research Proj</td><td>BSCN 4201-07</td><td>41.0</td></tr>
-    </table>
-
-    <h3>SUMMARY</h3>
-    <p>Cumulative GPA: <b>B+</b> | Practical GPA: <b>3.89</b> | Total Credits: <b>345</b></p>
-
-    <div class="btn-box">
-        <button onclick="window.print()" style="background:#0056b3;">DAABAC PDF</button>
-        <button onclick="readText()" style="background:#28a745;">DHAGEYSO CODKA</button>
-    </div>
-</div>
-
-<script>
-    function readText() {
-        const text = document.getElementById('content').innerText;
-        const msg = new SpeechSynthesisUtterance(text);
-        window.speechSynthesis.speak(msg);
-    }
-</script>
+        db.ref('live_queue').on('value', (snapshot) => {
+            const data = snapshot.val();
+            if(data) {
+                document.getElementById('dNum').innerText = data.num;
+                document.getElementById('dName').innerText = data.name;
+                document.getElementById('dRoom').innerText = data.room;
+                
+                // Codka Faseexda ah
+                window.speechSynthesis.cancel();
+                const msg = new SpeechSynthesisUtterance(`Bukaan ${data.name}, lambar ${data.num}, fadlan gal qolka ${data.room}`);
+                msg.lang = 'so-SO'; msg.rate = 0.8;
+                window.speechSynthesis.speak(msg);
+            }
+        });
+    </script>
 </body>
 </html>
