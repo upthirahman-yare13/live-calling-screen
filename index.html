@@ -38,7 +38,7 @@
                 document.getElementById('liveNum').innerText = data.num;
                 document.getElementById('liveName').innerText = data.name;
                 document.getElementById('liveRoom').innerText = data.room;
-                document.getElementById('liveDoc').innerText = "Dr. " + data.doctor;
+                document.getElementById('liveDoc').innerText =  " + data.doctor;
                 
                 // Dhawaaq haddii aad rabto (Optional: Ding Dong)
                 let msg = new SpeechSynthesisUtterance("Number " + data.num + ", " + data.name);
