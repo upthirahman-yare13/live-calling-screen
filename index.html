@@ -38,9 +38,11 @@
                 document.getElementById('liveNum').innerText = data.num;
                 document.getElementById('liveName').innerText = data.name;
                 document.getElementById('liveRoom').innerText = data.room;
-                document.getElementById('liveDoc').innerText =  " + data.doctor;
                 
-                // Dhawaaq haddii aad rabto (Optional: Ding Dong)
+                // Halkan ayaan ka saaray "Dr. " maadaama xogtu ay horey u waddo
+                document.getElementById('liveDoc').innerText = data.doctor;
+                
+                // Codka (Ding Dong)
                 let msg = new SpeechSynthesisUtterance("Number " + data.num + ", " + data.name);
                 window.speechSynthesis.speak(msg);
             }
