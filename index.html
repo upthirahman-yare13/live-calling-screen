@@ -1,52 +1,42 @@
-<!DOCTYPE html>
-<html lang="so">
-<head>
-    <meta charset="UTF-8">
-    <title>CareQueue | TV Display</title>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <style>
-        body { background: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 50px; }
-        .live-card { background: #1e293b; padding: 40px; border-radius: 20px; border: 5px solid #2563eb; display: inline-block; width: 80%; }
-        .ticket-num { font-size: 150px; color: #fbbf24; font-weight: bold; margin: 0; }
-        .patient-name { font-size: 50px; margin-top: 10px; }
-        .room-box { font-size: 40px; background: #2563eb; padding: 10px 30px; border-radius: 10px; display: inline-block; margin-top: 20px; }
-    </style>
-</head>
-<body>
-    <h1>HADDA WAXAA LA SUGAYAA</h1>
-    <div class="live-card">
-        <p class="ticket-num" id="liveNum">--</p>
-        <p class="patient-name" id="liveName">Sugitaanka...</p>
-        <div class="room-box">QOLKA: <span id="liveRoom">--</span></div>
-        <p style="font-size: 30px;">Dhakhtarka: <span id="liveDoc" style="color:#fbbf24">--</span></p>
-    </div>
+<script>
+    const firebaseConfig = { 
+        apiKey: "AIzaSyB5LuhewiHycIpkMWq-3HUW8yRlsSy4fLA", 
+        databaseURL: "https://carequeue-manager-default-rtdb.firebaseio.com",
+        projectId: "carequeue-manager"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-    <script>
-        const firebaseConfig = { 
-            apiKey: "AIzaSyB5LuhewiHycIpkMWq-3HUW8yRlsSy4fLA", 
-            databaseURL: "https://carequeue-manager-default-rtdb.firebaseio.com",
-            projectId: "carequeue-manager"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+    // Akhrinta xogta tooska ah (Live Queue)
+    db.ref('live_queue').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if(data) {
+            document.getElementById('liveNum').innerText = data.num;
+            document.getElementById('liveName').innerText = data.name;
+            document.getElementById('liveRoom').innerText = data.room;
+            document.getElementById('liveDoc').innerText = data.doctor;
+            
+            // JOOJI CODKII HORE HADDII UU SOCDO
+            window.speechSynthesis.cancel();
 
-        // Akhrinta xogta tooska ah (Live Queue)
-        db.ref('live_queue').on('value', (snapshot) => {
-            const data = snapshot.val();
-            if(data) {
-                document.getElementById('liveNum').innerText = data.num;
-                document.getElementById('liveName').innerText = data.name;
-                document.getElementById('liveRoom').innerText = data.room;
-                
-                // Halkan ayaan ka saaray "Dr. " maadaama xogtu ay horey u waddo
-                document.getElementById('liveDoc').innerText = data.doctor;
-                
-                // Codka (Ding Dong)
-                let msg = new SpeechSynthesisUtterance("Number " + data.num + ", " + data.name);
-                window.speechSynthesis.speak(msg);
-            }
-        });
-    </script>
-</body>
-</html>
+            // DIYAARI FARRIINTA (English)
+            const textToSpeak = `Ticket number ${data.num}, ${data.name}. Please go to room ${data.room}. Doctor ${data.doctor} is waiting for you.`;
+            const msg = new SpeechSynthesisUtterance(textToSpeak);
+            msg.lang = 'en-US'; // Codka English
+            msg.rate = 0.8;      // Tartiib
+            
+            // CODKA OO 3 JEER SOO LABA-LABAANAYA
+            let count = 0;
+            msg.onend = function() {
+                count++;
+                if (count < 3) {
+                    setTimeout(() => {
+                        window.speechSynthesis.speak(msg);
+                    }, 2000); // 2 ilbiriqsi u dhaxayso wicitaannada
+                }
+            };
+
+            window.speechSynthesis.speak(msg);
+        }
+    });
+</script>
