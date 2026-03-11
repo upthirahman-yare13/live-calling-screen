@@ -7,51 +7,27 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
         :root { --blue: #2563eb; --gold: #fbbf24; --dark: #0f172a; }
-        body { 
-            background: var(--dark); 
-            color: white; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            text-align: center; 
-            margin: 0; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            height: 100vh;
-        }
-        .header { font-size: 40px; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 5px; }
-        .live-card { 
-            background: #1e293b; 
-            padding: 50px; 
-            border-radius: 30px; 
-            border: 8px solid var(--blue); 
-            display: inline-block; 
-            width: 85%; 
-            box-shadow: 0 0 50px rgba(37, 99, 235, 0.3);
-        }
-        .ticket-num { font-size: 220px; color: var(--gold); font-weight: bold; margin: 0; line-height: 1; }
-        .patient-name { font-size: 70px; margin: 20px 0; text-transform: capitalize; }
+        body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .header { font-size: 40px; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; }
+        .live-card { background: #1e293b; padding: 50px; border-radius: 30px; border: 8px solid var(--blue); display: inline-block; width: 85%; margin: 0 auto; }
+        .ticket-num { font-size: 220px; color: var(--gold); font-weight: bold; margin: 0; }
+        .patient-name { font-size: 70px; margin: 20px 0; }
         .info-row { display: flex; justify-content: space-around; align-items: center; margin-top: 30px; }
-        .room-box { font-size: 50px; background: var(--blue); padding: 15px 40px; border-radius: 15px; font-weight: bold; }
-        .doc-name { font-size: 40px; color: var(--gold); }
-        .footer-msg { position: absolute; bottom: 20px; width: 100%; font-size: 20px; opacity: 0.6; }
+        .room-box { font-size: 50px; background: var(--blue); padding: 15px 40px; border-radius: 15px; }
     </style>
 </head>
 <body>
 
     <div class="header">Hadda Waxaa la Sugayaa (Now Calling)</div>
 
-    <div class="live-card" id="displayCard">
+    <div class="live-card">
         <p class="ticket-num" id="liveNum">--</p>
         <p class="patient-name" id="liveName">Sugitaanka...</p>
-        
         <div class="info-row">
             <div class="room-box">ROOM: <span id="liveRoom">--</span></div>
-            <div class="doc-name">Dr. <span id="liveDoc">--</span></div>
+            <div id="liveDoc" style="font-size: 40px; color: var(--gold);">--</div>
         </div>
     </div>
-
-    <div class="footer-msg">CareQueue Real-time Management System</div>
 
     <script>
         const firebaseConfig = { 
@@ -62,65 +38,38 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // 1. Akhrinta xogta tooska ah
-        db.ref('live_queue').on('value', (snapshot) => {
-            const data = snapshot.val();
+        // Xiriirinta Database-ka iyo Codka 3-da jeer
+        db.ref('live_queue').on('value', (snap) => {
+            const data = snap.val();
             if(data) {
-                // Cusboonaysii Shaashadda
+                // Cusboonaysiinta shaashadda
                 document.getElementById('liveNum').innerText = data.num;
                 document.getElementById('liveName').innerText = data.name;
                 document.getElementById('liveRoom').innerText = data.room;
-                document.getElementById('liveDoc').innerText = data.doctor;
-
-                // 2. Shaqada Codka (English Male Voice - 3 Times)
-                playVoice(data.num, data.name, data.room);
+                document.getElementById('liveDoc').innerText = "Dr. " + data.doctor;
+                
+                // Codka 3-da jeer (English Male Voice)
+                window.speechSynthesis.cancel(); // Jooji haddii cod kale socdo
+                let count = 0;
+                
+                function speak() {
+                    if(count < 3) {
+                        const msg = new SpeechSynthesisUtterance(`Attention, patient ${data.name}. Please proceed to room ${data.room}.`);
+                        msg.lang = 'en-US';
+                        msg.rate = 0.8; // Cod fasiix ah
+                        msg.onend = () => { 
+                            count++; 
+                            if(count < 3) setTimeout(speak, 1000); 
+                        };
+                        window.speechSynthesis.speak(msg);
+                    }
+                }
+                speak();
             } else {
-                // Haddii la tirtiro xogta (Clear)
                 document.getElementById('liveNum').innerText = "--";
                 document.getElementById('liveName').innerText = "Ma jiro bukaan hadda la sugayo";
-                document.getElementById('liveRoom').innerText = "--";
-                document.getElementById('liveDoc').innerText = "--";
             }
         });
-
-        function playVoice(num, name, room) {
-            // Jooji cod kasta oo hadda socda
-            window.speechSynthesis.cancel();
-
-            // Farriinta Ingiriisiga ah
-            const text = `Attention please. Ticket number ${num}. ${name}. Please proceed to room ${room}.`;
-            
-            let count = 0;
-            const speak = () => {
-                if (count < 3) {
-                    const msg = new SpeechSynthesisUtterance(text);
-                    
-                    // Doorashada Codka (Nin Ingiriis ah)
-                    const voices = window.speechSynthesis.getVoices();
-                    // Isku day inuu helo codka "Google US English" ama "Microsoft David"
-                    msg.voice = voices.find(voice => voice.name.includes('Male') || voice.name.includes('David') || voice.lang === 'en-US') || voices[0];
-                    
-                    msg.rate = 0.85; // Xawaare dhexdhexaad ah oo la fahmi karo
-                    msg.pitch = 1;   // Cod dabiici ah
-                    msg.volume = 1;  // Codka ugu sarreeya
-
-                    msg.onend = () => {
-                        count++;
-                        if (count < 3) {
-                            setTimeout(speak, 1500); // 1.5 ilbiriqsi ka dib ku celi
-                        }
-                    };
-                    window.speechSynthesis.speak(msg);
-                }
-            };
-
-            // Sug in codadka la soo raro ka dibna bilow
-            if (window.speechSynthesis.getVoices().length === 0) {
-                window.speechSynthesis.onvoiceschanged = speak;
-            } else {
-                speak();
-            }
-        }
     </script>
 </body>
 </html>
